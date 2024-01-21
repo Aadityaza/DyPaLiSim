@@ -1,12 +1,5 @@
 let CANVAS_SIZE = 500;
 
-function loadAtomData(callback) {
-    fetch('atoms.json')
-        .then(response => response.json())
-        .then(data => callback(data))
-        .catch(error => console.error('Error loading atom data:', error));
-}
-
 class Atom {
     constructor(x, y, color, size = 2, radius_of_influence = RadiusofInfluence) {
         this.x = x;
@@ -19,23 +12,6 @@ class Atom {
     }
 }
 
-document.getElementById('addAtomButton').addEventListener('click', function() {
-    const name = document.getElementById('atomName').value || `Particle ${getUniqueNumber()}`;
-    const count = parseInt(document.getElementById('atomCount').value);
-    const color = document.getElementById('atomColor').value;
-    const size = parseInt(document.getElementById('atomSize').value);
-    const radiusOfInfluence = parseInt(document.getElementById('radiusOfInfluence').value);
-
-    let newAtom = {
-        name: name,
-        count: parseInt(count),
-        color: color,
-        size: parseInt(size),
-        radiusOfInfluence: parseInt(radiusOfInfluence)
-    };
-
-    saveAtomToServer(newAtom, 'atoms.json');
-});
 
 // Function to initialize and start the simulation
 function initializeSimulation() {
