@@ -1,0 +1,46 @@
+{
+  "atoms": [
+    {
+      "name": "Silver",
+      "count": 100,
+      "color": "#C0C0C0",
+      "size": 2,
+      "radiusOfInfluence": 50
+    },
+    {
+      "name": "Gold",
+      "count": 100,
+      "color": "#FFD700",
+      "size": 3,
+      "radiusOfInfluence": 20
+    },
+    {
+      "name": "Magenta",
+      "count": 100,
+      "color": "#FF00FF",
+      "size": 7,
+      "radiusOfInfluence": 50
+    },
+    {
+      "name": "Teal",
+      "count": 100,
+      "color": "#008080",
+      "size": 5,
+      "radiusOfInfluence": 10
+    },
+    {
+      "name": "Coral",
+      "count": 100,
+      "color": "#FF7F50",
+      "size": 4,
+      "radiusOfInfluence": 40
+    },
+    {
+      "name": "Lime",
+      "count": 100,
+      "color": "#00FF00",
+      "size": 2,
+      "radiusOfInfluence": 30
+    }
+  ]
+}

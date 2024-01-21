@@ -50,3 +50,7 @@ canvas {
 #simulateButton:hover {
     background-color: #005ca3;
 }
+
+#atomControls {
+    margin-bottom: 20px;
+}

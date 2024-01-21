@@ -1,0 +1,28 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atom Simulation</title>
+    <link rel="stylesheet" type="text/css" href="static/styles.css">
+</head>
+<body>
+    <canvas id="life"></canvas>
+    <div id="controls">    
+        <button id="simulateButton">Start Simulation</button>
+    </div>
+    <div id="atomControls">
+        <input type="text" id="atomName" placeholder="Name of Atom">
+        <input type="number" id="atomCount" placeholder="Number of Atoms">
+        <input type="color" id="atomColor" placeholder="Color">
+        <input type="number" id="atomSize" placeholder="Size">
+        <input type="number" id="radiusOfInfluence" placeholder="Radius of Influence">
+        <button id="addAtomButton">Add Atom</button>
+    </div>
+    
+    <script src="static/js/interactions.js"></script>
+
+    <script src="static/js/script.js"></script>
+    <script src="static/js/draw.js"></script>
+</body>
+</html>
