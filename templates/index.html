@@ -5,14 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atom Simulation</title>
     <link rel="stylesheet" type="text/css" href="static/styles.css">
-    <link rel="stylesheet" type="text/css" href="static/slider.css">
     <script src="https://unpkg.com/htmx.org"></script>
 </head>
 <body>
-    <header>
-        <h1>Particle Simulation</h1>
-    </header>
-
     <main class="flex-container">
         <section id="editParticles" class="particle-controls">
             <h2>Edit Particles</h2>
@@ -21,7 +16,10 @@
             <section id="particlesList" class="particles-list">
                 <ul id="particleListDisplay"></ul>
             </section>
-
+            <button id="setInteractionRuleButton">Set Interaction Rule</button><br>
+            <div id = interaction-form>
+                <!-- form goes here -->
+            </div>
         </section>
 
         <section id="simulation" class="simulation-display">

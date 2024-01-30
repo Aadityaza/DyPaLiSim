@@ -1,4 +1,6 @@
-let CANVAS_SIZE = 500;
+let CANVAS_SIZE =800;
+let atoms = [];
+let atomGroups;
 
 class Atom {
     constructor(x, y, color, size = 2, radius_of_influence = RadiusofInfluence) {
@@ -25,65 +27,24 @@ function initializeSimulation() {
      canvas.height = CANVAS_SIZE;
      canvas.style.display = 'block';
 
-     // Read the number of atoms for each type from the input fields
-    const AtomSilverCount = 100;
-    const AtomGoldCount = 100;
-    const AtomMagentaCount = 100;
-    const AtomTealCount = 100;
-    const AtomCoralCount = 100;
-    const AtomLimeCount = 100;
-
-     // Initializing atoms and starting the simulation
-     let atoms = [];
-     // Initialization
-    const AtomSilver = createAtoms(AtomSilverCount, "#C0C0C0", atoms,2,50);
-    const AtomGold = createAtoms(AtomGoldCount, "#FFD700", atoms, 3,20);
-    const AtomMagenta = createAtoms(AtomMagentaCount, "#FF00FF", atoms, 7,50);
-    const AtomTeal = createAtoms(AtomTealCount, "#008080", atoms, 5,10);
-    const AtomCoral = createAtoms(AtomCoralCount, "#FF7F50", atoms, 4,40);
-    const AtomLime = createAtoms(AtomLimeCount, "#00FF00", atoms,2,30);
-
-    // Update function for animation
     function update() {
-
-        // Interaction rules within the same atom type
-    applyInteractionRule(AtomSilver, AtomSilver, -0.5); 
-    applyInteractionRule(AtomGold, AtomGold, -0.20); 
-    applyInteractionRule(AtomMagenta, AtomMagenta, -0.5); 
-    applyInteractionRule(AtomTeal, AtomTeal, -0.5); 
-    applyInteractionRule(AtomCoral, AtomCoral, -0.5); 
-    applyInteractionRule(AtomLime, AtomLime, -0.23); 
-
-    // Interactions between different atom types
-    // Note: These are just examples, and the actual values can be adjusted for different dynamics
-    applyInteractionRule(AtomSilver, AtomGold, 0.2); 
-    applyInteractionRule(AtomSilver, AtomMagenta, -0.3); 
-    applyInteractionRule(AtomSilver, AtomTeal, 0); 
-    applyInteractionRule(AtomSilver, AtomCoral, 0.1); 
-    applyInteractionRule(AtomSilver, AtomLime, -0.8); 
-
-    applyInteractionRule(AtomGold, AtomMagenta, 0.7); 
-    applyInteractionRule(AtomGold, AtomTeal, -0.6);
-    applyInteractionRule(AtomGold, AtomCoral, 0.5); 
-    applyInteractionRule(AtomGold, AtomLime, -0.7);
-
-    applyInteractionRule(AtomMagenta, AtomTeal, 0.4); 
-    applyInteractionRule(AtomMagenta, AtomCoral, -0.5);
-    applyInteractionRule(AtomMagenta, AtomLime, 0.6); 
-
-    applyInteractionRule(AtomTeal, AtomCoral, -0.4);
-    applyInteractionRule(AtomTeal, AtomLime, -0.3); 
-
-    applyInteractionRule(AtomCoral, AtomLime, 0.5);
-
-
-
         // Clear the canvas and set the background to black
         context.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 
+        // Update positions and velocities of atoms
+        for (const atom1 of atomGroups) {
+                for (const atom2 of atomGroups) {
+                    if (atom1.name !== atom2.name) {
+                        const attractionInput = document.getElementById(`${atom1.name}_${atom2.name}`);
+                        const attractionValue = parseFloat(attractionInput.value);
+                        applyInteractionRule(atom1.atoms, atom2.atoms, attractionValue);
+                    }
+                }
+            }
+
         // Redraw all atoms in their updated positions
-        atoms.forEach(atom => draw(context, atom.x, atom.y, atom.color, atom.size)); 
-        
+        atoms.forEach(atom => draw(context, atom.x, atom.y, atom.color, atom.size));
+
         // Request the next animation frame to continue the loop
         requestAnimationFrame(update);
     }
@@ -141,3 +102,86 @@ function applyInteractionRule(atoms1, atoms2, attraction) {
         atom1.y = Math.max(0, Math.min(atom1.y, CANVAS_SIZE)); // Ensure atom stays within bounds
     });
 }
+// Assuming particleData, createAtoms, and applyInteractionRule functions are defined elsewhere
+
+function showInteractionForm() {
+    console.log('click..');
+    atomGroups = particleData.map(particle => {
+        return {
+            name: particle.partical,
+            atoms: createAtoms(parseInt(particle.count), particle.color, atoms, parseInt(particle.size), parseInt(particle.radiusOfInfluence))
+        };
+    });
+
+    for (const atom of atomGroups) {
+        console.log(atom.name);
+    }
+
+    // Reference to the existing div in your HTML
+    const formContainer = document.getElementById('interaction-form');
+
+    // Create the HTML form
+    const form = document.createElement('form');
+    form.id = 'interactionForm';
+
+    // Loop through atomGroups to create form elements for each atom combination
+    atomGroups.forEach(atom1 => {
+        atomGroups.forEach(atom2 => {
+            // Skip if it's the same atom or if the combination already exists
+            if (!document.getElementById(`${atom1.name}_${atom2.name}`)) {
+                const inputLabel = document.createElement('label');
+                const sliderLabel = document.createElement('span'); // Display for the slider value
+                const inputAttraction = document.createElement('input');
+
+                inputLabel.textContent = `Attraction between ${atom1.name} and ${atom2.name}: `;
+                sliderLabel.textContent = '0'; // Initial value display
+                inputAttraction.type = 'range';
+                inputAttraction.min = -1;
+                inputAttraction.max = 1;
+                inputAttraction.step = 0.1;
+                inputAttraction.value = 0;
+                inputAttraction.id = `${atom1.name}_${atom2.name}`;
+
+                // Update the value display dynamically
+                inputAttraction.addEventListener('input', function () {
+                    sliderLabel.textContent = inputAttraction.value;
+                });
+
+                form.appendChild(inputLabel);
+                form.appendChild(inputAttraction);
+                form.appendChild(sliderLabel);
+                form.appendChild(document.createElement('br'));
+            }
+        });
+    });
+
+    // Add a submit button
+    const submitButton = document.createElement('button');
+    submitButton.type = 'button'; // Change to 'submit' if you want to submit the form
+    submitButton.textContent = 'Apply Interaction Rules';
+    submitButton.addEventListener('click', function () {
+        // Call the applyInteractionRule function with the entered values
+        for (const atom1 of atomGroups) {
+            for (const atom2 of atomGroups) {
+                if (atom1.name !== atom2.name) {
+                    const attractionInput = document.getElementById(`${atom1.name}_${atom2.name}`);
+                    const attractionValue = parseFloat(attractionInput.value);
+                    applyInteractionRule(atom1.atoms, atom2.atoms, attractionValue);
+                }
+            }
+        }
+    });
+
+    form.appendChild(submitButton);
+
+    // Append the form to the existing div in your HTML
+    formContainer.appendChild(form);
+
+    document.getElementById('interactionForm').addEventListener('change', function() {
+        interactionsUpdated = true;
+    });
+}
+
+// Add an event listener to the "setInteractionRuleButton"
+document.getElementById('setInteractionRuleButton').addEventListener('click', showInteractionForm);
+

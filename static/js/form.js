@@ -25,17 +25,39 @@ function addParticleForm() {
     newForm.innerHTML = `
         <label for="partical">Particle ${currentFormCount}:</label>
         <input type="text" id="partical" name="partical" placeholder="Particle ${currentFormCount}" required><br>
+
         <label for="count">Count:</label>
-        <input type="number" id="count" name="count" min="50" max="1000" value="100" required><br>
+        <input type="range" id="count" name="count" min="50" max="1000" value="100" required>
+        <span id="countValue">100</span><br>
+
         <label for="color">Color:</label>
-        <input type="color" id="color" name="color" required><br>
+        <input type="color" id="color" name="color" required value="#FFFFFF"><br>
+
+
         <label for="size">Size:</label>
-        <input type="number" id="size" name="size" min="1" max="10" value="2" required><br>
+        <input type="range" id="size" name="size" min="1" max="10" value="2" required>
+        <span id="sizeValue">2</span><br>
+
         <label for="radiusOfInfluence">Radius of Influence:</label>
-        <input type="number" id="radiusOfInfluence" name="radiusOfInfluence" min="0" max="500" value="50" required><br>
+        <input type="range" id="radiusOfInfluence" name="radiusOfInfluence" min="0" max="500" value="50" required>
+        <span id="radiusValue">50</span><br>
+
         <button type="submit" id="submitButton">Set Parameters</button><br>
         <hr>
     `;
+
+    // Add event listeners for the range inputs
+    newForm.querySelector('#count').addEventListener('input', function() {
+        document.getElementById('countValue').textContent = this.value;
+    });
+
+    newForm.querySelector('#size').addEventListener('input', function() {
+        document.getElementById('sizeValue').textContent = this.value;
+    });
+
+    newForm.querySelector('#radiusOfInfluence').addEventListener('input', function() {
+        document.getElementById('radiusValue').textContent = this.value;
+    });
 
     // Add an event listener to the form for form submission
     newForm.addEventListener("submit", function(event) {
@@ -66,6 +88,10 @@ function submitForm(form) {
     updateParticleListDisplay();
 }
 
+const interactionRuleButton = document.getElementById('setInteractionRuleButton');
+interactionRuleButton.disabled = true;
+interactionRuleButton.style.display = 'none'; // Initially hide the button
+
 // Function to update the particle list display
 function updateParticleListDisplay() {
     const particleListElement = document.getElementById('particleListDisplay');
@@ -76,4 +102,13 @@ function updateParticleListDisplay() {
         particleItem.textContent = `Particle ${index + 1}: ${JSON.stringify(particle)}`;
         particleListElement.appendChild(particleItem);
     });
+
+    // Enable and show the interaction rule button if there are particles
+    if (particleData.length > 0) {
+        interactionRuleButton.disabled = false;
+        interactionRuleButton.style.display = 'block'; // Show the button
+    } else {
+        interactionRuleButton.disabled = true;
+        interactionRuleButton.style.display = 'none'; // Hide the button
+    }
 }

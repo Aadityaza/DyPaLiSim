@@ -21,13 +21,13 @@ body {
 }
 
 .simulation-display {
-    flex: 0 0 70%; /* Allocate 60% of the space for simulation display */
+    flex: 0 0 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative; /* Add this to make the canvas dimensions relative to this container */
 }
-
 
 canvas {
     border: 1px solid #ddd;
@@ -36,7 +36,8 @@ canvas {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#simulateButton {
+
+#setInteractionRuleButton,#simulateButton {
     padding: 10px 20px;
     margin:10px;
     font-size: 18px;
@@ -47,6 +48,7 @@ canvas {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
 
 #simulateButton:hover {
     background-color: #005ca3;
