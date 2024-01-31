@@ -9,6 +9,10 @@ atoms = []
 def index():
     return render_template( 'index.html')
 
+@app.route('/interaction')
+def interaction():
+    return render_template( 'interaction.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

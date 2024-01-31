@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atom Simulation</title>
+    <link rel="stylesheet" type="text/css" href="static/styles.css">
+    <script src="https://unpkg.com/htmx.org"></script>
+</head>
+<body>
+    <main class="flex-container">
+        <section id="interactionSettings" class="interaction-settings">
+            <h2>Set Interaction Rules</h2>
+            <div id="interaction-form">
+                <!-- Dynamic form will be inserted here -->
+            </div>
+            <button id="applyInteractionRulesButton">Apply Interaction Rules</button>
+        </section>
+
+        <section id="simulation" class="simulation-display">
+            <canvas id="life"></canvas>
+        </section>
+    </main>
+
+    <script src="static/js/interactions.js"></script>
+    <script src="static/js/script.js"></script>
+    <script src="static/js/draw.js"></script>
+    <script src="static/js/form.js"></script>
+
+
+</body>
+</html>

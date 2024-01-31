@@ -10,14 +10,14 @@
 <body>
     <main class="flex-container">
         <section id="editParticles" class="particle-controls">
-            <h2>Edit Particles</h2>
             <div id="particles-forms">
+                <h2>Create Particles</h2>
             </div>
             <section id="particlesList" class="particles-list">
                 <ul id="particleListDisplay"></ul>
             </section>
             <button id="setInteractionRuleButton">Set Interaction Rule</button><br>
-            <div id = interaction-form>
+            <div id="interaction-form">
                 <!-- form goes here -->
             </div>
         </section>
@@ -35,5 +35,22 @@
     <script src="static/js/draw.js"></script>
     <script src="static/js/form.js"></script>
 
+    <script>
+        // Add an event listener to the "Set Interaction Rule" button
+        document.getElementById('setInteractionRuleButton').addEventListener('click', function () {
+            // Select the elements you want to hide
+            const createParticlesSection = document.getElementById('particles-forms');
+            const particlesList = document.getElementById('particlesList');
+            const setInteractionRuleButton = document.getElementById('setInteractionRuleButton');
+
+            // Hide the selected elements by setting their display property to 'none'
+            createParticlesSection.style.display = 'none';
+            particlesList.style.display = 'none';
+            setInteractionRuleButton.style.display = 'none';
+
+            // Call the function to show the interaction form (showInteractionForm())
+            showInteractionForm();
+        });
+    </script>
 </body>
 </html>

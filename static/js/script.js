@@ -28,6 +28,7 @@ function initializeSimulation() {
      canvas.style.display = 'block';
 
     function update() {
+    console.log("up date vo hai guys!")
         // Clear the canvas and set the background to black
         context.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 
@@ -134,12 +135,15 @@ function showInteractionForm() {
                 const inputAttraction = document.createElement('input');
 
                 inputLabel.textContent = `Attraction between ${atom1.name} and ${atom2.name}: `;
-                sliderLabel.textContent = '0'; // Initial value display
                 inputAttraction.type = 'range';
                 inputAttraction.min = -1;
                 inputAttraction.max = 1;
-                inputAttraction.step = 0.1;
-                inputAttraction.value = 0;
+                inputAttraction.step = 0.01
+                // Generate a random number within the range of -1 to 1
+                const randomAttractionValue = Math.random() * 2 - 1;
+                inputAttraction.value = randomAttractionValue.toFixed(2);
+                sliderLabel.textContent = randomAttractionValue.toFixed(2);
+
                 inputAttraction.id = `${atom1.name}_${atom2.name}`;
 
                 // Update the value display dynamically
@@ -178,10 +182,5 @@ function showInteractionForm() {
     formContainer.appendChild(form);
 
     document.getElementById('interactionForm').addEventListener('change', function() {
-        interactionsUpdated = true;
     });
 }
-
-// Add an event listener to the "setInteractionRuleButton"
-document.getElementById('setInteractionRuleButton').addEventListener('click', showInteractionForm);
-
