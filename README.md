@@ -1,6 +1,5 @@
 
 ## Vieo Demo
-https://github.com/Aadityaza/Partical/assets/45432533/f30f8d60-47b7-4410-9a18-09c1e412fc6d
 
 ## Screenshots
 ![image](https://github.com/Aadityaza/Partical/assets/45432533/4fcd5892-f91a-4681-a89f-3e2f4079f545)
