@@ -1,5 +1,5 @@
 
-## Vieo Demo
+## Video Demo
 
 https://github.com/Aadityaza/Partical/assets/45432533/f234b968-3174-4e84-b7e7-524925b0c9c6
 
@@ -10,3 +10,6 @@ https://github.com/Aadityaza/Partical/assets/45432533/f234b968-3174-4e84-b7e7-52
 ![image](https://github.com/Aadityaza/Partical/assets/45432533/fec84041-67bd-4a2a-ae7e-9904e5bf633f)
 
 ![image](https://github.com/Aadityaza/Partical/assets/45432533/30df4c74-5e0b-4383-92e5-19040d805d4e)
+
+
+
